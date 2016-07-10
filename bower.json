@@ -6,7 +6,7 @@
     "kelly murray"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/kellymurray/tiny-wine-cellar",
+  "homepage": "https://github.com/kellymurray/tiny-wine/",
   "ignore": [
     "**/.*",
     "node_modules",
