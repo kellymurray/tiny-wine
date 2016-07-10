@@ -8,8 +8,8 @@ $(document).ready(function() {
         dataType: 'json',
         url: 'http://localhost:3004/wines',
         method: 'GET',
-      }).done(function(data) {
-        console.log(data)
+      }).done(function(wines) {
+        console.log(wines)
         });
       });
     });

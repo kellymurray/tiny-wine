@@ -1,7 +1,10 @@
+//inspired by and modified from https://gist.github.com/iksose/9401758
+
 var express = require('express');
 var path = require('path');
+var morgan = require('morgan');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+// var logger = require('morgan');
 var wine = require('./routes/wines');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -9,38 +12,17 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var mongo = require('mongodb');
-
-var Server = mongo.Server,
-    Db = mongo.Db,
-    BSON = mongo.BSONPure;
-
-var server = new Server('localhost', 27017, {auto_reconnect: true});
-db = new Db('winedb', server);
-
-db.open(function(err, db) {
-    if(!err) {
-        console.log("Connected to 'winedb' database");
-        db.collection('wines', {strict:true}, function(err, collection) {
-            if (err) {
-                console.log("The 'wines' collection doesn't exist. Creating it with sample data...");
-                populateDB();
-            }
-        });
-    }
-});
-
 
 var app = express();
+
+app.use(morgan('dev')); /* 'default','short','tiny','dev' */
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-// uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
