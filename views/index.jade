@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  #wineApp
+  h1= title
+  form(name="add-estimation", method="post")
+         div.input
+             span.label Find a Wine
+             p
+             //input(type="text", name="title")
+         div.actions
+             input(type="submit", value="display", class="wine-button")
